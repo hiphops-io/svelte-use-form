@@ -17,9 +17,11 @@ jobs:
       - name: Create package
         run: yarn package
       - name: Compress
-        run: tar -czvf release.tar.gz ./package
+        run: |
+          cd package
+          tar -czvf release.tar.gz *
       - name: Upload to release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            release.tar.gz
+            package/release.tar.gz
